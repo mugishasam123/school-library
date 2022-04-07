@@ -1,8 +1,8 @@
 require './decorator'
-require './rental.rb'
+require './rental'
 
 class Person < Nameable
-  attr_accessor :name, :age,:rentals
+  attr_accessor :name, :age, :rentals
   attr_reader :id
 
   def initialize(age, name = 'unknown', parent_permission: true)
@@ -11,24 +11,24 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
-    @rentals=[]
-   
+    @rentals = []
   end
 
-  def add_rentals(date,book)
-    Rental.new(date,self,book)
+  def add_rentals(date, book)
+    Rental.new(date, self, book)
+  end
 
   def of_age?
-     @age >= 18
+    @age >= 18
   end
 
   private :of_age?
 
   def can_use_services?
-     of_age? || @parent_permission
+    of_age? || @parent_permission
   end
 
   def correct_name
-    @name 
+    @name
   end
 end
