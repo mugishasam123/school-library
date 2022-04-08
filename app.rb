@@ -59,11 +59,11 @@ class App
     parent_permission = gets.chomp.downcase
     case parent_permission
     when 'n'
-      Student.new(age, 'classroom', name, parent_permission: false)
+      student = Student.new('undefined', age, name, parent_permission: false)
       @persons << student
       puts 'Student doesnt have parent permission, cant rent books'
     when 'y'
-      student = Student.new(age, 'classroom', name, parent_permission: false)
+      student = Student.new('undefined', age, name, parent_permission: true)
       @persons << student
       puts 'Student created successfully'
     end
@@ -77,8 +77,8 @@ class App
     name = gets.chomp
     print 'Enter teacher specialization: '
     specialization = gets.chomp
-    teacher = Teacher.new(age, specialization, name)
-    @persons << teacher
+    teacher = Teacher.new(specialization, age, name)
+    @persons.push(teacher)
     puts 'Teacher created successfully'
   end
 
@@ -122,7 +122,7 @@ class App
     puts 'Rented Books:'
     @rentals.each do |rental|
       if rental.person.id == id
-        puts "Peson: #{rental.person.name}  Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
+        puts "Person: #{rental.person.name} Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
 
       else
         puts
